@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: langgraph-worker
+  namespace: ai-chief-of-staff
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: langgraph-worker
+  template:
+    metadata:
+      labels:
+        app: langgraph-worker
+    spec:
+      containers:
+        - name: worker
+          image: python:3.11-slim
+          envFrom:
+            - configMapRef:
+                name: langgraph-worker-config
+          command: ["/bin/sh", "-c"]
+          args:
+            - >
+              echo "Starting langgraph worker";
+              while true; do
+                echo "[$(date)] polling queue ${QUEUE_NAME} at ${REDIS_HOST}:${REDIS_PORT}";
+                sleep 10;
+              done
