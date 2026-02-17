@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: task-producer
+  namespace: ai-chief-of-staff
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: producer
+              image: ghcr.io/example/langgraph-producer:latest
+              env:
+                - name: REDIS_HOST
+                  value: task-redis
+                - name: REDIS_PORT
+                  value: "6379"
+                - name: QUEUE_NAME
+                  value: chief-of-staff-tasks
