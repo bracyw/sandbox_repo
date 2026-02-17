@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chief-of-staff-worker
+  labels:
+    app: chief-of-staff-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chief-of-staff-worker
+  template:
+    metadata:
+      labels:
+        app: chief-of-staff-worker
+    spec:
+      containers:
+        - name: worker
+          image: ghcr.io/example/chief-of-staff-worker:latest
+          env:
+            - name: REDIS_URL
+              value: redis://redis:6379/0
+            - name: QUEUE_NAME
+              value: chief_of_staff_jobs

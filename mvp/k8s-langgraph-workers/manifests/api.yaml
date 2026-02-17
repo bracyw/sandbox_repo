@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chief-of-staff-api
+  labels:
+    app: chief-of-staff-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chief-of-staff-api
+  template:
+    metadata:
+      labels:
+        app: chief-of-staff-api
+    spec:
+      containers:
+        - name: api
+          image: ghcr.io/example/chief-of-staff-api:latest
+          env:
+            - name: REDIS_URL
+              value: redis://redis:6379/0
+            - name: QUEUE_NAME
+              value: chief_of_staff_jobs
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chief-of-staff-api
+spec:
+  selector:
+    app: chief-of-staff-api
+  ports:
+    - port: 80
+      targetPort: 8080
