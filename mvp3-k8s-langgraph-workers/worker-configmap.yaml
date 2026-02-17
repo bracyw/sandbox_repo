@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: langgraph-worker-config
+  namespace: ai-chief-of-staff
+data:
+  REDIS_HOST: queue-redis
+  REDIS_PORT: "6379"
+  QUEUE_NAME: chief-of-staff-jobs
