@@ -1,0 +1,35 @@
+{
+  "name": "angular-ui-library-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Angular UI library MVP inspired by shadcn and modern React component libraries",
+  "scripts": {
+    "build": "ng build ui",
+    "test": "ng test ui --watch=false",
+    "lint": "ng lint"
+  },
+  "dependencies": {
+    "@angular/animations": "^18.2.0",
+    "@angular/common": "^18.2.0",
+    "@angular/compiler": "^18.2.0",
+    "@angular/core": "^18.2.0",
+    "@angular/forms": "^18.2.0",
+    "@angular/platform-browser": "^18.2.0",
+    "@angular/platform-browser-dynamic": "^18.2.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.2",
+    "tslib": "^2.7.0",
+    "zone.js": "^0.14.10"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^18.2.6",
+    "@angular/cli": "^18.2.6",
+    "@angular/compiler-cli": "^18.2.0",
+    "ng-packagr": "^18.2.0",
+    "postcss": "^8.4.45",
+    "tailwindcss": "^3.4.11",
+    "typescript": "^5.5.4",
+    "autoprefixer": "^10.4.20"
+  }
+}
