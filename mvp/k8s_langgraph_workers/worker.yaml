@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: langgraph-worker
+  namespace: ai-chief-of-staff
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: langgraph-worker
+  template:
+    metadata:
+      labels:
+        app: langgraph-worker
+    spec:
+      containers:
+        - name: worker
+          image: ghcr.io/example/langgraph-worker:latest
+          env:
+            - name: REDIS_HOST
+              value: task-redis
+            - name: REDIS_PORT
+              value: "6379"
+            - name: QUEUE_NAME
+              value: chief-of-staff-tasks
