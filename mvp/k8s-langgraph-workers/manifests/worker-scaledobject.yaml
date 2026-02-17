@@ -1,0 +1,15 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: chief-of-staff-worker-scaler
+spec:
+  scaleTargetRef:
+    name: chief-of-staff-worker
+  minReplicaCount: 1
+  maxReplicaCount: 5
+  triggers:
+    - type: redis
+      metadata:
+        address: redis:6379
+        listName: chief_of_staff_jobs
+        listLength: "5"
